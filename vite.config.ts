@@ -22,6 +22,11 @@ export default defineConfig(({ command }) => {
         alias: {
           '@': path.resolve(__dirname, './src'),
           '@assets': path.resolve(__dirname, './src/assets'),
+          '@shared': path.resolve(__dirname, './src/shared'),
+          '@entities': path.resolve(__dirname, './src/entities'),
+          '@widgets': path.resolve(__dirname, './src/widgets'),
+          '@features': path.resolve(__dirname, './src/features'),
+          '@pages': path.resolve(__dirname, './src/pages'),
         },
       },
     },
