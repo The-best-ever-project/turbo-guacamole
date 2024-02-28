@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  webapp:
+    build: .
+
+    env_file:
+      - .env
+
+    environment:
+      - IMAGE_NAME=${IMAGE_NAME}
+      - CONTAINER_NAME=${CONTAINER_NAME}
+      - EXTERNAL_PORT=${EXTERNAL_PORT}
+      - INTERNAL_PORT=${INTERNAL_PORT}
+
+    image: ${IMAGE_NAME}
+
+    container_name: ${CONTAINER_NAME}
+
+    restart: always
+
+    stdin_open: true
+
+    tty: true
+
+    volumes:
+      - '.:/app'
+
+    ports:
+      - ${EXTERNAL_PORT}:${INTERNAL_PORT}
