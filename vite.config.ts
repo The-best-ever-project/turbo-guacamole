@@ -3,9 +3,17 @@ import react from '@vitejs/plugin-react-swc';
 import path from 'path';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command }) => {
+export default defineConfig((context) => {
+  const isDev = context.mode === 'development';
+
   const baseConfig: UserConfig = {
     plugins: [react()],
+    css: {
+      modules: {
+        localsConvention: 'camelCase',
+        generateScopedName: isDev ? (name: string) =>  name : undefined,
+      }
+    },
     server: {
       watch: {
         usePolling: true,
@@ -26,12 +34,13 @@ export default defineConfig(({ command }) => {
       resolve: {
         alias: {
           '@': path.resolve(__dirname, './src'),
-          '@assets': path.resolve(__dirname, './src/assets'),
-          '@shared': path.resolve(__dirname, './src/shared'),
-          '@entities': path.resolve(__dirname, './src/entities'),
+          '@app': path.resolve(__dirname, './src/app'),
+          '@pages': path.resolve(__dirname, './src/pages'),
           '@widgets': path.resolve(__dirname, './src/widgets'),
           '@features': path.resolve(__dirname, './src/features'),
-          '@pages': path.resolve(__dirname, './src/pages'),
+          '@entities': path.resolve(__dirname, './src/entities'),
+          '@shared': path.resolve(__dirname, './src/shared'),
+          '@assets': path.resolve(__dirname, './src/assets'),
         },
       },
     },
@@ -41,5 +50,5 @@ export default defineConfig(({ command }) => {
     },
   };
 
-  return config[command];
+  return config[context.command];
 });
