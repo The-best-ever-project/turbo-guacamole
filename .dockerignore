@@ -1,0 +1,17 @@
+node_modules/
+
+dist/
+
+docker-compose.yml
+
+Dockerfile
+
+.gitignore
+
+.DS_Store
+
+README.md
+
+.idea/
+
+.git/

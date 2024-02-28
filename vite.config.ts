@@ -6,15 +6,20 @@ import path from 'path';
 export default defineConfig(({ command }) => {
   const baseConfig: UserConfig = {
     plugins: [react()],
+    server: {
+      watch: {
+        usePolling: true,
+      },
+      host: true,
+      strictPort: true,
+      port: 5173,
+      open: false,
+    },
   };
 
   const config: Record<ConfigEnv['command'], UserConfig> = {
     serve: {
       ...baseConfig,
-      server: {
-        port: 3000,
-        open: true,
-      },
       build: {
         sourcemap: 'inline',
       },
